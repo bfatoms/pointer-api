@@ -1,0 +1,19 @@
+{
+    "name": "bfatoms/pointer-sdk",
+    "description": "A laravel package for managing pointer api",
+    "type": "library",
+    "require": {
+        "bfatoms/requester": "^1.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Louie Foronda",
+            "email": "louieforonda@pinion.ph"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": { "BfAtoms\\Pointer\\": "src/" }
+    }
+}
