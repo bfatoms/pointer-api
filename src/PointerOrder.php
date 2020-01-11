@@ -14,4 +14,10 @@ class PointerOrder extends PointerApi
     {
         parent::__construct();
     }
+    
+    public function pay($id, $amount, $reference = null)
+    {
+        $url = $this->makeRoute($id)."/pay";
+        return $this->post($url, ['amount' => $amount,'reference' => $reference], $this->getDigest());
+    }
 }
