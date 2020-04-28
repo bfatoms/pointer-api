@@ -168,6 +168,41 @@ abstract class PointerApi
             ->addQuery('all','true')
             ->browse()['data'][0] ?? null;
     }
+    
+    public function addJson($data = null, $url = null)
+    {
+        try {
+            $url = $url ?? $this->makeRoute();
+            return $this->json('POST', $url, array_merge($data, request()->all()), $this->getDigest());
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage());
+        }
+    }
+
+    public function editJson($id, $data = [], $url = null)
+    {
+        try {
+            $url = $url ?? $this->makeRoute($id);
+            return $this->json('PUT', $url, array_merge($data, request()->all()), $this->getDigest());
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage());
+        }
+    }
+
+    public function json($type, $url, $data, $header)
+    {
+        try {
+            $this->result = $this->requester->json($type, $url, $data, $header);
+            $this->queries = [];
+            return $this->result;
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage() . "\n\n" . json_encode([
+                'url'    => $url,
+                'data'   => $data,
+                'header' => $header
+            ]));
+        }
+    }
 
 }
 
