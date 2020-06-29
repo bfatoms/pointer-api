@@ -41,6 +41,7 @@ abstract class PointerApi
 
     public function makeRoute($id = null, $body=false)
     {
+        // dd($id);
         $route = rtrim(config('pointer.api_url'),'/') . '/'. ltrim($this->route,'/');
 
         if(!empty($id)){
@@ -52,7 +53,7 @@ abstract class PointerApi
                 $this->queries = [];
                 return $route."?".$query_string;
             }
-        }        
+        }
         return $route;
     }
 
@@ -72,7 +73,9 @@ abstract class PointerApi
 
     public function post($url, $data=[], $header=[])
     {
+        // dd($url);
         $this->result = json_decode($this->requester->post($url, $data, $header),true);
+        // dd($this->result);
         $this->queries = [];
         return $this->result;
     }
@@ -88,7 +91,7 @@ abstract class PointerApi
     {
         $data = array_merge($data, request()->all(), $this->queries);
         $this->queries = [];
-        $this->result = $this->requester->get($url, $data, array_merge($header, $this->getDigest()) );
+        $this->result = $this->requester->get($url, $data, array_merge($header, $this->getDigest()));
         return json_decode($this->result, true);
     }
 
@@ -115,6 +118,7 @@ abstract class PointerApi
 
     public function browse($url = null)
     {
+
         $url = $url ?? $this->makeRoute(null, true);
         return $this->get($url);
     }
