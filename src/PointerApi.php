@@ -73,9 +73,7 @@ abstract class PointerApi
 
     public function post($url, $data=[], $header=[])
     {
-        // dd($url);
         $this->result = json_decode($this->requester->post($url, $data, $header),true);
-        // dd($this->result);
         $this->queries = [];
         return $this->result;
     }

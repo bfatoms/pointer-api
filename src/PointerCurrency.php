@@ -4,9 +4,9 @@ namespace BfAtoms\Pointer;
 
 use BfAtoms\Pointer\PointerApi;
 
-class PointerPaymentTerm extends PointerApi
+class PointerCurrency extends PointerApi
 {
-    protected $route = '/api/v2/integration/orders/payment-terms';
+    protected $route = '/api/v2/integration/currencies';
 
     public function __construct()
     {
